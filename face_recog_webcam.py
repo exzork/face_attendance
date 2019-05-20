@@ -136,7 +136,8 @@ while True:
         for face_encoding in face_encodings:
             # See if the face is a match for the known face(s)
             matches = face_recognition.compare_faces(known_face_encodings, face_encoding)
-            name = "Unknown"
+            name="Unknown"
+            text = "Can'f found your face in database"
 
             # # If a match was found in known_face_encodings, just use the first one.
             # if True in matches:
@@ -156,15 +157,16 @@ while True:
                 db.execute("SELECT face_id,date_log FROM date_attendance where face_id='"+str(id_face)+"' AND date_log='"+str(d.year)+"-"+f"{d.month:02d}"+"-"+f"{d.day:02d}"+"'")
                 db.fetchall()
                 if db.rowcount<1 :
-                    if TOTAL > 0:
+                    if TOTAL >=3:
                         db.execute("INSERT INTO date_attendance(face_id,date_log,time_log) VALUES('"+str(name)+"','"+str(d.year)+"-"+f"{d.month:02d}"+"-"+f"{d.day:02d}"+"','"+str(d.hour)+":"+str(d.minute)+":"+str(d.second)+"')")
                         mydb.commit()
                     else:
-                        text = "Hello "+name_face+" Please Blink Your Eye Slowly"
+                        text = "Hello "+name_face+" Please Blink Your Eye "+str(3-TOTAL)+" Time Slowly"
                 else:
                     text = name_face+" you already attendace today"
+            else:
+                text = "Can't found your face in database"
     process_this_frame = not process_this_frame
-
 
     # Display the results
     for (top, right, bottom, left), name in zip(face_locations, face_names):
