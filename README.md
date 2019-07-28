@@ -1,7 +1,7 @@
 # face_attendance
 Face Attendance System
 Using :
-1. Python 3.7 (dlib,opencv,numpy,os,mysql.connector,datetime,scipy,imutils,time)
+1. Python 3.7 (face_recognition,dlib,opencv,numpy,os,mysql.connector,datetime,scipy,imutils,time)
 2. Php 7.0
 3. MariaDB
 
